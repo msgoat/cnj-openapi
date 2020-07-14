@@ -12,6 +12,7 @@ Build results: a Docker image containing a Spring Boot application.
 
 ## Exposed REST endpoints
 
+Simply call the OpenAPI REST endpoint at `/openapi` to get an OpenAPI compliant API specification.
 
 ## Exposed environment variables
 

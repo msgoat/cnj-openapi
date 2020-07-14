@@ -1,12 +1,12 @@
 # cnj-openapi
 
-Showcase of a simple cloud native Java application exposing REST endpoints (provider-side) and calling REST endpoints (consumer-side).
+Showcase of a simple cloud native Java application documenting REST APIs with [OpenAPI](https://swagger.io/specification/).
 
-The actual implementation of REST endpoints is demonstrated with different Java backend technologies:
+The actual documentation of REST APIs with OpenAPI is demonstrated with different Java backend technologies:
 
 * Java EE (see: [cnj-openapi-backend-javaee](cnj-openapi-backend-javaee/README.md))
 * Eclipse MicroProfile (see: [cnj-openapi-backend-micro](cnj-openapi-backend-micro/README.md))
-* Spring Boot + Spring Data (see: [cnj-openapi-backend-spring](cnj-openapi-backend-spring/README.md))
+* Spring Boot (see: [cnj-openapi-backend-spring](cnj-openapi-backend-spring/README.md))
 * Quarkus (see: [cnj-openapi-backend-quarkus](cnj-openapi-backend-quarkus/README.md))
 
 All applications are using a common downstream service [cnj-openapi-downstream-spring](cnj-openapi-downstream-spring/README.md)
