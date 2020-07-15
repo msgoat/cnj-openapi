@@ -1,5 +1,7 @@
 package group.msg.at.cloud.cloudtrain.core.entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * Enumeration representing the life-cycle of a {@link Task}.
  *
@@ -7,6 +9,7 @@ package group.msg.at.cloud.cloudtrain.core.entity;
  * @version 1.0
  * @since release 1.0 31.10.2012 11:39:50
  */
+@Schema(description = "represents the life-cyle state of a Task", enumAsRef = true)
 public enum TaskLifeCycleState {
     /**
      * Status of the current task is undefined.

@@ -91,7 +91,7 @@ public class Task {
      */
     @Min(0)
     @Max(100)
-    @Schema(description = "date/time when this task is supposed to be completed", minimum = "0", maximum = "100")
+    @Schema(description = "completion rate in percent, ranges from 0 to 100", minimum = "0", maximum = "100")
     private int completionRate;
 
     /**
