@@ -3,6 +3,13 @@ package group.msg.at.cloud.cloudtrain.adapter.rest;
 import group.msg.at.cloud.cloudtrain.core.boundary.TaskManagement;
 import group.msg.at.cloud.cloudtrain.core.entity.Task;
 import group.msg.at.cloud.common.web.jaxrs.RouterAwareUriBuilderFactory;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 
 import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
@@ -25,6 +32,7 @@ import java.util.UUID;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @RolesAllowed("CLOUDTRAIN_USER")
+@SecurityRequirement(name = "oidc", scopes = { "openid" ,"microprofile-jwt" })
 public class TasksResource {
 
     @Context
@@ -37,6 +45,11 @@ public class TasksResource {
     private TaskManagement boundary;
 
     @GET
+    @Operation(summary = "returns all tasks")
+    @APIResponse(responseCode = "200",
+            description = "body contains all available tasks",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                    schema = @Schema(ref = "#/components/schema/Task")))
     public Response getAllTasks() {
         Response result;
         List<Task> found = this.boundary.getAllTasks();
@@ -46,6 +59,15 @@ public class TasksResource {
 
     @GET
     @Path("{taskId}")
+    @Operation(summary = "returns the task with the given task ID")
+    @APIResponses({
+            @APIResponse(responseCode = "200",
+                    description = "body contains the task with the given task ID",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                            schema = @Schema(ref = "#/components/schema/Task"))),
+            @APIResponse(responseCode = "400",
+                    description = "unable to find a task with the given task ID; body is empty")
+    })
     public Response getTask(@PathParam("taskId") UUID taskId) {
         Response result;
         Task found = this.boundary.getTaskById(taskId);
@@ -58,6 +80,15 @@ public class TasksResource {
     }
 
     @POST
+    @Operation(summary = "creates a new task based on the given task data and returns its location URI")
+    @APIResponses({
+            @APIResponse(responseCode = "201",
+                    description = "task could be created successfully; header location contains URI of newly created task; body is empty",
+                    headers = {@Header(name = "Location", description = "URI of newly created task")}
+            ),
+            @APIResponse(responseCode = "400", description = "failed to create new task due to invalid task data"),
+            @APIResponse(responseCode = "500", description = "failed to create new task due to internal error")
+    })
     public Response addTask(Task task) {
         Response result;
         UUID taskId = this.boundary.addTask(task);
@@ -68,6 +99,14 @@ public class TasksResource {
 
     @PUT
     @Path("{taskId}")
+    @Operation(summary = "updates the given task")
+    @APIResponses({
+            @APIResponse(responseCode = "204",
+                    description = "task could be updated successfully; body is empty"
+            ),
+            @APIResponse(responseCode = "400", description = "failed to update task due to invalid task data"),
+            @APIResponse(responseCode = "500", description = "failed to create new task due to internal error")
+    })
     public Response modifyTask(@PathParam("taskId") UUID taskId, Task task) {
         Response result;
         this.boundary.modifyTask(task);
@@ -77,6 +116,13 @@ public class TasksResource {
 
     @DELETE
     @Path("{taskId}")
+    @Operation(summary = "deletes the given task")
+    @APIResponses({
+            @APIResponse(responseCode = "204",
+                    description = "task could be deleted successfully; body is empty"
+            ),
+            @APIResponse(responseCode = "500", description = "failed to delete task due to internal error")
+    })
     public Response removeTask(@PathParam("taskId") UUID taskId) {
         Response result;
         this.boundary.removeTask(taskId);

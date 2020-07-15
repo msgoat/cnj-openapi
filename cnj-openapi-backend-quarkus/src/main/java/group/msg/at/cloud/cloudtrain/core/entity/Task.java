@@ -1,5 +1,10 @@
 package group.msg.at.cloud.cloudtrain.core.entity;
 
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -12,41 +17,49 @@ import java.util.UUID;
  * @version 1.0
  * @since release 1.0
  */
+@Schema(description = "represents a task")
 public class Task {
 
     /**
      * Unique identifier of this task.
      */
+    @Schema(description = "unique identifier of this task", readOnly = true, type = SchemaType.STRING, format = "uuid")
     private UUID id;
 
     /**
      * Single-line description or summary of what this task is about.
      */
+    @NotNull
     @Size(max = 80)
+    @Schema(description = "single-line description or summary of what this task is about", required = true, maxLength = 80)
     private String subject;
 
     /**
      * Detailed description of this task.
      */
     @Size(max = 1024)
+    @Schema(description = "detailed description of this task", required = false, maxLength = 1024)
     private String description;
 
     /**
      * Groups task into specific categories like "Bug", "Enhancement".
      */
     @NotNull
+    @Schema(description = "groups task into specific categories (see: TaskCategory)", required = true, implementation = TaskCategory.class)
     private TaskCategory category = TaskCategory.UNDEFINED;
 
     /**
      * Priority.
      */
     @NotNull
+    @Schema(description = "priority", required = true, implementation = TaskPriority.class)
     private TaskPriority priority = TaskPriority.UNDEFINED;
 
     /**
      * Status of this task.
      */
     @NotNull
+    @Schema(description = "status of this task", required = true, implementation = TaskLifeCycleState.class)
     private TaskLifeCycleState lifeCycleState = TaskLifeCycleState.UNDEFINED;
 
     /**
@@ -55,6 +68,7 @@ public class Task {
      * Expected to be set when task lifeCycleState is <code>running</code>.
      * </p>
      */
+    @Schema(description = "date/time when this task has been submitted", type = SchemaType.STRING, format = "date-time")
     private LocalDateTime submittedAt;
 
     /**
@@ -63,16 +77,21 @@ public class Task {
      * Expected to be set when task lifeCycleState is <code>completed</code>.
      * </p>
      */
+    @Schema(description = "user-ID of participant who submitted this task")
     private String submitterUserId;
 
     /**
      * Date/time when this task is supposed to be completed.
      */
+    @Schema(description = "date/time when this task is supposed to be completed", type = SchemaType.STRING, format = "date-time")
     private LocalDateTime dueDate;
 
     /**
      * Completion rate in percent, ranges from 0 to 100.
      */
+    @Min(0)
+    @Max(100)
+    @Schema(description = "completion rate in percent, ranges from 0 to 100", minimum = "0", maximum = "100")
     private int completionRate;
 
     /**
@@ -81,6 +100,7 @@ public class Task {
      * Expected to be set when task lifeCycleState is <code>completed</code>.
      * </p>
      */
+    @Schema(description = "date/time when this task has been completed")
     private LocalDateTime completionDate;
 
     /**
@@ -90,6 +110,7 @@ public class Task {
      * </p>
      */
     @Size(max = 16)
+    @Schema(description = "user-ID of participant who completed this task", maxLength = 16)
     private String completedByUserId;
 
     /**
@@ -97,6 +118,7 @@ public class Task {
      * this task.
      */
     @Size(max = 16)
+    @Schema(description = "user-ID of participant who is currently responsible for the completion of this task", maxLength = 16)
     private String responsibleUserId;
 
     /**
@@ -107,44 +129,66 @@ public class Task {
      * </p>
      */
     @Size(max = 32)
+    @Schema(description = "project-ID of the project this task is related to", maxLength = 32)
     private String affectedProjectId;
 
     /**
      * Application-ID of the application this task is related to.
      */
     @Size(max = 32)
+    @Schema(description = "application-ID of the application this task is related to", maxLength = 32)
     private String affectedApplicationId;
 
     /**
      * Name of the logical module this task is related to.
      */
     @Size(max = 32)
+    @Schema(description = "name of the logical module this task is related to", maxLength = 32)
     private String affectedModule;
 
     /**
      * Application resource that this task is referring to.
      */
     @Size(max = 256)
+    @Schema(description = "application resource that this task is referring to", maxLength = 256)
     private String affectedResource;
 
     /**
      * Estimated effort in hours to complete this task.
      */
+    @Schema(description = "estimated effort in hours to complete this task")
     private int estimatedEffort;
 
     /**
      * Actual effort in hours to complete this task.
      */
+    @Schema(description = "actual effort in hours to complete this task")
     private int actualEffort;
 
+    /**
+     * User-ID of the user who created this task
+     */
     @Size(max = 31)
+    @Schema(description = "user-ID of the user who created this task", maxLength = 31, readOnly = true)
     private String createdBy;
 
+    /**
+     * Date/time when this task has been created.
+     */
+    @Schema(description = "date/time when this task has been created", readOnly = true, type = SchemaType.STRING, format = "date-time")
     private LocalDateTime createdAt;
 
+    /**
+     * User-ID of the last user who modified this task
+     */
     @Size(max = 31)
+    @Schema(description = "user-ID of the last user who modified this task", maxLength = 31, readOnly = true)
     private String lastModifiedBy;
 
+    /**
+     * Date/time when this task has been modified.
+     */
+    @Schema(description = "date/time when this task has been modified", readOnly = true, type = SchemaType.STRING, format = "date-time")
     private LocalDateTime lastModifiedAt;
 
     public Task() {

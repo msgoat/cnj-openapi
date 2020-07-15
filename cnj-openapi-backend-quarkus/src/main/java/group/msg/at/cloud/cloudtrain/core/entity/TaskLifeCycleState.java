@@ -1,5 +1,7 @@
 package group.msg.at.cloud.cloudtrain.core.entity;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 /**
  * Enumeration representing the life-cycle of a {@link Task}.
  *
@@ -7,6 +9,7 @@ package group.msg.at.cloud.cloudtrain.core.entity;
  * @version 1.0
  * @since release 1.0 31.10.2012 11:39:50
  */
+@Schema(description = "enumeration representing the life-cycle of a task")
 public enum TaskLifeCycleState {
     /**
      * Status of the current task is undefined.

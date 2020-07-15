@@ -2,6 +2,9 @@
 
 Cloud native JavaEE backend based on JavaEE Full Profile Application Server using MP OpenAPI feature to document REST APIs.
 
+Since the JavaEE showcase does not differ from the MicroProfile showcase, 
+this JavaEE showcase demonstrates the usage of a static OpenAPI YAML file located at `/META-INF/openapi.yaml`.
+
 ## Build this application 
 
 ``` 
