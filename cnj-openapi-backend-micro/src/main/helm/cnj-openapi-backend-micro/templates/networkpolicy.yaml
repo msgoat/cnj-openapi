@@ -3,7 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: {{ include "cnj-openapi-backend-micro.fullname" . }}
   labels:
-    {{- include "cnj-openapi-backend-micro.labels" . | nindent 4 }}
+  {{- include "cnj-openapi-backend-micro.labels" . | nindent 4 }}
 spec:
   podSelector:
     matchLabels:

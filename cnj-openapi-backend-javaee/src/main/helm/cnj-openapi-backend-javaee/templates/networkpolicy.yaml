@@ -3,7 +3,7 @@ kind: NetworkPolicy
 metadata:
   name: {{ include "cnj-openapi-backend-javaee.fullname" . }}
   labels:
-    {{- include "cnj-openapi-backend-javaee.labels" . | nindent 4 }}
+  {{- include "cnj-openapi-backend-javaee.labels" . | nindent 4 }}
 spec:
   podSelector:
     matchLabels:

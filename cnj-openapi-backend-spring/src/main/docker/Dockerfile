@@ -1,4 +1,4 @@
-FROM docker.at41tools.k8s.aws.msgoat.eu/cloudtrain/at41-docker-jre11:2.0.0
+FROM docker.cloudtrain.aws.msgoat.eu/cloudtrain/at41-docker-jre11:3.0.0
 
 
 LABEL maintainer="michael.theis@msg.group" \
@@ -31,7 +31,8 @@ RUN chown -R spring:spring /home/spring \
 
 USER spring
 
-EXPOSE 8080
+# use user ID instead of user name to allow kubernetes to check non-root users
+USER 1000
 
 ENTRYPOINT ["/home/spring/docker-entrypoint.sh"]
 CMD ["java"]

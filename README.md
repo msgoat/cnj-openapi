@@ -12,7 +12,11 @@ The actual documentation of REST APIs with OpenAPI is demonstrated with differen
 All applications are using a common downstream service [cnj-openapi-downstream-spring](cnj-openapi-downstream-spring/README.md)
 
 ## Status
-![Build status](https://drone.at.automotive.msg.team/api/badges/msgoat/cnj-openapi/status.svg)
+![Build status](https://drone.cloudtrain.aws.msgoat.eu/api/badges/msgoat/cnj-openapi/status.svg)
+
+## Release information
+
+Check [changelog](changelog.md) for latest version and release information.
 
 ## Build this showcase 
 

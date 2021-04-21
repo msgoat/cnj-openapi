@@ -40,6 +40,6 @@ public class OpenApiConfiguration {
                         .addSecuritySchemes("oidc",
                                 new SecurityScheme()
                                         .type(SecurityScheme.Type.OPENIDCONNECT)
-                                        .openIdConnectUrl("https://iam.at41tools.k8s.aws.msgoat.eu/auth/realms/cloudtrain/.well-known/openid-configuration")));
+                                        .openIdConnectUrl("https://oidc.cloudtrain.aws.msgoat.eu/auth/realms/cloudtrain/.well-known/openid-configuration")));
     }
 }
