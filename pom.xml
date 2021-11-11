@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>group.msg.at.cloud</groupId>
     <artifactId>cnj-openapi</artifactId>
-    <version>4.0.0</version>
+    <version>5.0.0</version>
     <packaging>pom</packaging>
     <description>Cloud native Java applications showcase for REST APIs documented with OpenAPI</description>
     <properties>
@@ -12,7 +12,6 @@
     </properties>
     <modules>
         <module>cnj-openapi-downstream-spring</module>
-        <module>cnj-openapi-backend-javaee</module>
         <module>cnj-openapi-backend-micro</module>
         <module>cnj-openapi-backend-spring</module>
         <module>cnj-openapi-backend-quarkus</module>

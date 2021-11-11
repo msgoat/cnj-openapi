@@ -4,7 +4,6 @@ Showcase of a simple cloud native Java application documenting REST APIs with [O
 
 The actual documentation of REST APIs with OpenAPI is demonstrated with different Java backend technologies:
 
-* Java EE (see: [cnj-openapi-backend-javaee](cnj-openapi-backend-javaee/README.md))
 * Eclipse MicroProfile (see: [cnj-openapi-backend-micro](cnj-openapi-backend-micro/README.md))
 * Spring Boot (see: [cnj-openapi-backend-spring](cnj-openapi-backend-spring/README.md))
 * Quarkus (see: [cnj-openapi-backend-quarkus](cnj-openapi-backend-quarkus/README.md))
