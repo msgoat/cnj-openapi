@@ -1,5 +1,7 @@
 # cnj-openapi
 
+> __@deprecated__: replaced by dedicated `cnj-openapi-*` repositories
+
 Showcase of a simple cloud native Java application documenting REST APIs with [OpenAPI](https://swagger.io/specification/).
 
 The actual documentation of REST APIs with OpenAPI is demonstrated with different Java backend technologies:
